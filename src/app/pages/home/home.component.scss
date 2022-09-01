@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  padding-top: 4vh;
+  padding-left: 4vh;
+  flex-direction: column;
+  width: 50vw;
+    .form-group {
+      display: flex;
+      justify-content: space-between;
+    }
+}
+
+.input-pair label, .input-pair input {
+  width: 20vw;
+}
+
+button {
+  width: 10vw;
+}
