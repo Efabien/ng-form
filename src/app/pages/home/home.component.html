@@ -1,25 +1,94 @@
-<div class="wrapper">
+<div class="wrapper" [formGroup]="registration">
+  <h1>Hackaton registration</h1>
+  <div class="registration-form">
+    <label>Register :</label>
+    <div class="registration-form">
+      <span>individually</span>
+      <input
+        [value]="registrationTypeEnum.INDIVIDUAL"
+        formControlName="type"
+        type="radio"
+      >
+    </div>
+    <div class="registration-form">
+      <span>as a group</span>
+      <input
+        [value]="registrationTypeEnum.GROUP"
+        formControlName="type"
+        type="radio"
+      >
+    </div>
+  </div>
   <div class="form-group">
     <div class="input-pair">
-      <label for="name">Name</label>
-      <input type="text" name="name">
+      <label for="name">Name *</label>
+      <input
+        [ngClass]="{ error : isInValid(controls['name']) }"
+        formControlName="name"
+        type="text"
+        name="name"
+      >
+      <ng-container *ngIf="isInValid(controls['name'])">
+        <span class="error-message">Name is required</span>
+      </ng-container>
     </div>
-    <div class="input-pair">
-      <label for="name">Last Name</label>
-      <input type="text" name="lastName">
+    <div *ngIf="controls['type'].value === registrationTypeEnum.INDIVIDUAL" class="input-pair">
+      <label for="lastName">Last Name</label>
+      <input formControlName="lastName" type="text" name="lastName">
     </div>
   </div>
-  <div class="input-pair">
-    <label for="email">Email</label>
-    <input type="email" name="email">
+  <div  *ngIf="controls['type'].value === registrationTypeEnum.GROUP" class="input-pair">
+    <label for="groupSize">Number of person</label>
+    <input
+      [ngClass]="{ error : isInValid(controls['groupSize']) }"
+      formControlName="groupSize"
+      min="2"
+      max="4"
+      type="number"
+      name="groupSize"
+    >
+    <ng-container *ngIf="isInValid(controls['groupSize'])">
+      <span *ngIf="controls['groupSize'].errors && controls['groupSize'].errors['min']" class="error-message">
+        Group members cannot be less than 2
+      </span>
+      <span *ngIf="controls['groupSize'].errors && controls['groupSize'].errors['max']" class="error-message">
+        Group members cannot be greater than 4
+      </span>
+    </ng-container>
   </div>
   <div class="input-pair">
-    <label>Choose</label>
-    <select>
-      <option>1</option>
-      <option>1</option>
-      <option>1</option>
+    <label for="email">Email *</label>
+    <input
+      [ngClass]="{ error : isInValid(controls['email']) }"
+      formControlName="email"
+      type="email"
+      name="email"
+    >
+    <ng-container *ngIf="isInValid(controls['email'])">
+      <span *ngIf="controls['email'].errors && controls['email'].errors['required']" class="error-message">
+        Email is required
+      </span>
+      <span *ngIf="controls['email'].errors && controls['email'].errors['email']" class="error-message">
+        The provided email is not valid
+      </span>
+    </ng-container>
+  </div>
+  <div class="input-pair">
+    <label>Languages</label>
+    <select formControlName="language">
+      <ng-container *ngFor="let language of languages">
+        <option [value]="language.id"> {{ language.symbol || language.name  }}</option>
+      </ng-container>
     </select>
   </div>
-  <button>Submit</button>
+  <button
+    [disabled]="registration.invalid"
+    (click)="send()"
+  >
+    Submit
+  </button>
+  <div *ngIf="submited">
+    <!-- {{ JSON.stringify(registration.value, null, 4)}} -->
+    {{ registration.value | json }}
+  </div>
 </div>

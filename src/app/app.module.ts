@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -13,6 +14,7 @@ import { HomeModule } from './pages/home/home.module';
     BrowserModule,
     AppRoutingModule,
     HomeModule,
+    CommonModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

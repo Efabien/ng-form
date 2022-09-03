@@ -1,12 +1,30 @@
 .wrapper {
+  margin: auto;
   display: flex;
   padding-top: 4vh;
   padding-left: 4vh;
   flex-direction: column;
-  width: 50vw;
-    .form-group {
-      display: flex;
-      justify-content: space-between;
+  width: 45vw;
+  border: solid;
+  padding: 5%;
+  margin-top: 5%;
+  border-width: 1px;
+}
+
+.form-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.registration-form{
+  display: flex;
+  margin-right: 1vw;
+    input {
+      margin-top: 0;
+      margin-bottom: 0
+    }
+    label {
+      margin-right: 1vw;
     }
 }
 
@@ -16,4 +34,21 @@
 
 button {
   width: 10vw;
+}
+
+.form-group, .input-pair {
+  margin-bottom: 0.5vh;
+}
+
+.registration-form {
+  margin-bottom: 1.5vh;
+}
+
+.error {
+  border: solid;
+  border-color: red;
+}
+
+.error-message {
+  color: red;
 }
