@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { RegistrationTypeEnum } from '@enums/registration-type.enum';
 import { Ilanguage } from '@interfaces/language';
 
@@ -39,9 +39,22 @@ export class HomeComponent implements OnInit {
       lastName: [''],
       groupSize: [null],
       email: ['', [Validators.required, Validators.email]],
+      phoneNumber: [
+        '',
+        [
+          Validators.pattern(/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/),
+          this.forbiddenPhoneValidator('034')
+        ]
+      ],
       language: [this.languages[0].id]
     });
     this.listeningChanges();
+  }
+
+  private forbiddenPhoneValidator(forbidden: string): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      return control.value.startsWith(forbidden) ? { forbiddenPhone: { value: control.value } } : null;
+    };
   }
 
   private listeningChanges(): void {

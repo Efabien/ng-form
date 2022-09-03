@@ -74,6 +74,23 @@
     </ng-container>
   </div>
   <div class="input-pair">
+    <label for="email">Phone</label>
+    <input
+      [ngClass]="{ error : isInValid(controls['phoneNumber']) }"
+      formControlName="phoneNumber"
+      type="tel"
+      name="tel"
+    >
+    <ng-container *ngIf="isInValid(controls['phoneNumber'])">
+      <span *ngIf="controls['phoneNumber'].errors && controls['phoneNumber'].errors['pattern']" class="error-message">
+        The provided phone number is not valid
+      </span>
+      <span *ngIf="controls['phoneNumber'].errors && controls['phoneNumber'].errors['forbiddenPhone']" class="error-message">
+        Seems that you are among the evil team, you are not allowed to participate
+      </span>
+    </ng-container>
+  </div>
+  <div class="input-pair">
     <label>Languages</label>
     <select formControlName="language">
       <ng-container *ngFor="let language of languages">
