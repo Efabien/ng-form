@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
     { id: 1, name: 'javascript', symbol: 'JS' },
     { id: 2, name: 'Golang', symbol: 'GO' },
     { id: 3, name: 'Rust' },
+    { id: 4, name: 'Flutter' },
     { id: 3, name: 'JAVA' }
   ];
 
