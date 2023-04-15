@@ -14,7 +14,8 @@ export class HomeComponent implements OnInit {
   public languages: Ilanguage[] = [
     { id: 1, name: 'javascript', symbol: 'JS' },
     { id: 2, name: 'Golang', symbol: 'GO' },
-    { id: 3, name: 'Rust' }
+    { id: 3, name: 'Rust' },
+    { id: 3, name: 'JAVA' }
   ];
 
   public submited: boolean = false;
